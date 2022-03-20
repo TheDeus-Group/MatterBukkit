@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
@@ -31,7 +32,7 @@ class EventListener implements Listener {
         advancements = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource("advancements.yml")));
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         if (event.isCancelled()) {
             return;
@@ -57,7 +58,7 @@ class EventListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
         FileConfiguration config = plugin.getConfig();
 
@@ -80,7 +81,7 @@ class EventListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerAdvancementDone(PlayerAdvancementDoneEvent event) {
         FileConfiguration config = plugin.getConfig();
 
@@ -131,7 +132,7 @@ class EventListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerLevelChange(PlayerLevelChangeEvent event) {
         int oldLevel = event.getOldLevel();
         int newLevel = event.getNewLevel();
@@ -168,7 +169,7 @@ class EventListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (!plugin.getConfig().getBoolean("outgoing.join.enable")) {
             return;
@@ -181,7 +182,7 @@ class EventListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
         if (!plugin.getConfig().getBoolean("outgoing.quit.enable")) {
             return;
